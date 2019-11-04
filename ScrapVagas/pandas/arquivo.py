@@ -1,7 +1,12 @@
 import csv
 import json
 import pandas as pd
+import os
 class Arquivo():
+
+    def scrapy(self):
+        os.system('cmd /c "scrapy crawl Vagas -o resultados.json"')
+
 
     def save(self):
 
@@ -36,6 +41,9 @@ class Arquivo():
         #Descricao
         df['Descricao'] = df['Descricao'].str.replace('<p>', '')
         df['Descricao'] = df['Descricao'].str.replace('</p>', '')
+        df['Descricao'] = df['Descricao'].str.replace('#', '')
+        df['Descricao'] = df['Descricao'].str.replace('<wbr>', '')
+        df['Descricao'] = df['Descricao'].str.replace('</wbr>', '')
 
         #Saving
         df.to_csv('Vagas.csv')
